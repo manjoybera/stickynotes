@@ -4,9 +4,9 @@ name: Build
 # Trigger this workflow on commit to master
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   # Job to build the React Js files using NPM
