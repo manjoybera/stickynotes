@@ -1,0 +1,38 @@
+{
+  "name": "stickynotes",
+  "version": "1.0.0",
+  "description": "This is a simple sticky notes application, A demo app to display the power of React JS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manjoybera/stickynotes.git"
+  },
+  "keywords": [],
+  "author": "Manjoy Bera",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manjoybera/stickynotes/issues"
+  },
+  "homepage": "https://github.com/manjoybera/stickynotes#readme",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-draggable": "^4.4.4",
+    "styled-components": "^5.3.5",
+    "styled-icons": "^10.45.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/preset-react": "^7.16.7",
+    "babel-loader": "^8.2.4",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
