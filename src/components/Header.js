@@ -1,18 +1,29 @@
-import React, { useContext } from "react";
-import styled, { css } from "styled-components";
+import React, { useContext, useEffect, useState } from "react";
+import styled, { css, keyframes } from "styled-components";
 import { StickyNote } from "@styled-icons/fa-solid/StickyNote";
 import { CommentAdd } from "@styled-icons/boxicons-solid/CommentAdd";
 import { DeleteDismiss } from "@styled-icons/fluentui-system-filled/DeleteDismiss";
 import { ThemeContext } from "../utilities/ThemeContextProvider";
 import { availableThemes } from "../constants/themes";
 import { DataContext } from "../utilities/DataContextProvider";
-import { Random } from "@styled-icons/fa-solid";
+import { useMediaQuery } from "react-responsive";
 
 const StyledHeader = styled.div`
-  height: 10vh;
   width: 100vw;
   display: flex;
   background: transparent;
+
+  ${(props) =>
+    !props.mobile &&
+    css`
+      align-items: center;
+    `}
+
+  ${(props) =>
+    props.mobile &&
+    css`
+      flex-direction: column;
+    `}
 `;
 
 const StyledSticyNoteIcon = styled(StickyNote)`
@@ -27,6 +38,22 @@ const StyledHeaderText = styled.div`
   margin: 0.5rem;
   font-size: 2.5rem;
   color: ${(props) => props.theme.DarkSecondaryColor};
+
+  ${(props) =>
+    props.mobile &&
+    css`
+      align-self: flex-end;
+    `}
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translate(3rem);
+  }
+
+  to {
+    transform: translate(0);
+  }
 `;
 
 const StyledColorPicker = styled.div`
@@ -36,10 +63,22 @@ const StyledColorPicker = styled.div`
   border-radius: 50%;
   background: ${(props) => props.availableThemes.PrimaryColor};
   border: 2px solid ${(props) => props.availableThemes.DarkPrimaryColor};
+
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease-out;
+    cursor: pointer;
+  }
+
+  ${(props) =>
+    !props.current &&
+    css`
+      animation: 0.3s ${slideOut} ease-out;
+    `}
 `;
 
 const StyledButton = styled.button`
-  height: 3rem;
+  height: 2.5rem;
   margin: 0.5rem;
   border-radius: 3px;
   background: ${(props) =>
@@ -52,18 +91,23 @@ const StyledButton = styled.button`
         ? props.theme.DarkSecondaryColor
         : props.theme.SecondaryColor};
   color: ${(props) => props.theme.SecondaryTextColor};
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: ${(props) => props.theme.SecondaryTextColor};
+
+  &:hover {
+    filter: brightness(125%);
+    cursor: pointer;
+  }
 `;
 
 const StyledCommentAdd = styled(CommentAdd)`
-  height: 2rem;
+  height: 1.5rem;
   color: ${(props) => props.theme.SecondaryTextColor};
   width: auto;
 `;
 
 const StyledDeleteDismiss = styled(DeleteDismiss)`
-  height: 2rem;
+  height: 1.5rem;
   color: ${(props) => props.theme.SecondaryTextColor};
   width: auto;
 `;
@@ -71,6 +115,11 @@ const StyledDeleteDismiss = styled(DeleteDismiss)`
 export function Header() {
   const { currentTheme, setCurrentTheme } = useContext(ThemeContext);
   const { currentData, setCurrentData } = useContext(DataContext);
+
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+
+  const [showSelectionColors, setShowSelectionColors] = useState(false);
 
   const AddNewNote = () => {
     let maxId =
@@ -93,19 +142,47 @@ export function Header() {
     setCurrentData([]);
   };
 
+  useEffect(() => {
+    if (showSelectionColors) {
+      setTimeout(() => setShowSelectionColors(false), 5000);
+    }
+  }, [showSelectionColors]);
+
+  const StyledColorPickerDiv = (
+    <>
+      {showSelectionColors &&
+        availableThemes
+          .filter((theme) => theme.Key != currentTheme.Key)
+          .map((theme) => (
+            <StyledColorPicker
+              availableThemes={theme}
+              onClick={() => setCurrentTheme(theme)}
+              key={theme.Key}
+            />
+          ))}
+      <StyledColorPicker
+        availableThemes={currentTheme}
+        onClick={() => setShowSelectionColors(true)}
+        current
+      />
+    </>
+  );
+
   return (
-    <StyledHeader>
-      <StyledHeaderText theme={currentTheme}>
+    <StyledHeader mobile={isTabletOrMobile && isPortrait}>
+      <StyledHeaderText
+        theme={currentTheme}
+        mobile={isTabletOrMobile && isPortrait}
+      >
         <StyledSticyNoteIcon /> Sticky Notes
       </StyledHeaderText>
-      <StyledColorPicker availableThemes={currentTheme} />
-      {availableThemes.map((theme) => (
-        <StyledColorPicker
-          availableThemes={theme}
-          onClick={() => setCurrentTheme(theme)}
-          key={theme.Key}
-        />
-      ))}
+      {isTabletOrMobile && isPortrait ? (
+        <div style={{ display: "flex", alignSelf: "flex-end" }}>
+          {StyledColorPickerDiv}
+        </div>
+      ) : (
+        StyledColorPickerDiv
+      )}
       <StyledButton theme={currentTheme} onClick={() => AddNewNote()} Primary>
         <StyledCommentAdd />
         New

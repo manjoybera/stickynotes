@@ -17,7 +17,7 @@ export const availableThemes = [
     Key: 1,
     PrimaryBackgroundColor: "#BDBDBD",
     PrimaryColor: "#2196F3",
-    DarkPrimaryColor: "1976D2",
+    DarkPrimaryColor: "#1976D2",
     LightPrimaryColor: "#BBDEFB",
     PrimaryTextColor: "#FFFFFF",
     SecondaryColor: "#FFEB3B",
