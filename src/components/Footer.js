@@ -4,7 +4,6 @@ import { ThemeContext } from "../utilities/ThemeContextProvider";
 
 const StyledFooter = styled.div`
   height: 5vh;
-  width: 100vw;
   background: transparent;
   text-align: center;
   color: ${(props) => props.theme.SecondaryTextColor};

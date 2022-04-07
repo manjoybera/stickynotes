@@ -19,7 +19,7 @@ const StyledNoteCard = styled.div`
   margin: 0.5rem 0 0 0.5rem;
 
   &:hover {
-    filter: brightness(125%);
+    filter: brightness(105%);
   }
 `;
 

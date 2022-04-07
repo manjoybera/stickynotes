@@ -9,7 +9,6 @@ import { DataContext } from "../utilities/DataContextProvider";
 import { useMediaQuery } from "react-responsive";
 
 const StyledHeader = styled.div`
-  width: 100vw;
   display: flex;
   background: transparent;
 
@@ -37,6 +36,7 @@ const StyledHeaderText = styled.div`
   display: flex;
   margin: 0.5rem;
   font-size: 2.5rem;
+  align-items: end;
   color: ${(props) => props.theme.DarkSecondaryColor};
 
   ${(props) =>
@@ -95,7 +95,7 @@ const StyledButton = styled.button`
   color: ${(props) => props.theme.SecondaryTextColor};
 
   &:hover {
-    filter: brightness(125%);
+    filter: brightness(105%);
     cursor: pointer;
   }
 `;
@@ -130,9 +130,9 @@ export function Header() {
     let note = {
       Id: newId,
       Header: "Note #" + newId,
-      Content: "Some random Note " + newId,
-      X: Math.floor(Math.random() * 500),
-      Y: Math.floor(Math.random() * 300),
+      Content: "",
+      X: Math.floor(Math.random() * 300),
+      Y: Math.floor(Math.random() * 100),
     };
     currentData.push(note);
     setCurrentData(currentData);
@@ -158,11 +158,13 @@ export function Header() {
               availableThemes={theme}
               onClick={() => setCurrentTheme(theme)}
               key={theme.Key}
+              title = {"Pick a Color"}
             />
           ))}
       <StyledColorPicker
         availableThemes={currentTheme}
         onClick={() => setShowSelectionColors(true)}
+        title = {"Pick a Color"}
         current
       />
     </>

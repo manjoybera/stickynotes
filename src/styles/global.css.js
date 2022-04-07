@@ -7,6 +7,7 @@ export default createGlobalStyle`
     background: ${(props) => props.theme.LightPrimaryColor};
     overflow-x: hidden;
     transition: background 500ms linear;
+    font-family: cursive;
   }
 
   div, textarea, button {

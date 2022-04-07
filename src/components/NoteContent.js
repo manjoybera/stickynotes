@@ -17,6 +17,7 @@ const StyledNoteInput = styled.textarea`
   outline: 0;
   border: 0;
   resize: none;
+  font-family: cursive;
 `;
 
 export function NoteContent(props) {
@@ -36,7 +37,8 @@ export function NoteContent(props) {
   ) : (
     <StyledNoteContent
       theme={props.theme}
-      onDoubleClick={() => setIsEditing(true)}
+      onClick={() => setIsEditing(true)}
+      title={"Click to Edit"}
     >
       {props.children}
     </StyledNoteContent>

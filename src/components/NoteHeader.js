@@ -14,6 +14,11 @@ const StyledNoteHeader = styled.div`
 const StyledCircleWithCross = styled(CircleWithCross)`
   height: 1.5rem;
   color: ${(props) => props.theme.DarkPrimaryColor};
+  &:hover {
+    transform: scale(1.1);
+    transition: 0.3s ease-out;
+    cursor: pointer;
+  }
 `;
 
 export function NoteHeader(props) {

@@ -9,10 +9,10 @@ import GlobalCSS from "../styles/global.css";
 import { useMediaQuery } from "react-responsive";
 
 const StyledBoard = styled.div`
-  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 2rem;
 `;
 
 export function Board(props) {
@@ -35,6 +35,7 @@ export function Board(props) {
                 display: "flex",
                 flexWrap: "wrap",
                 alignContent: "flex-start",
+                justifyContent: "center",
               }
             : { flexGrow: 1 }
         }
