@@ -131,8 +131,8 @@ export function Header() {
       Id: newId,
       Header: "Note #" + newId,
       Content: "",
-      X: Math.floor(Math.random() * 300),
-      Y: Math.floor(Math.random() * 100),
+      X: Math.floor(Math.random() * (window.innerWidth / 2)),
+      Y: Math.floor(Math.random() * (window.innerHeight / 10)),
     };
     currentData.push(note);
     setCurrentData(currentData);
@@ -158,13 +158,13 @@ export function Header() {
               availableThemes={theme}
               onClick={() => setCurrentTheme(theme)}
               key={theme.Key}
-              title = {"Pick a Color"}
+              title={"Pick a Color"}
             />
           ))}
       <StyledColorPicker
         availableThemes={currentTheme}
         onClick={() => setShowSelectionColors(true)}
-        title = {"Pick a Color"}
+        title={"Pick a Color"}
         current
       />
     </>
